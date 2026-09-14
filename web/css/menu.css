@@ -1,0 +1,179 @@
+/* ==========================================================
+   MENU.CSS — STAGE 2
+   Adds dropdown-level color variables and hover/active styling
+   ========================================================== */
+
+/* ====== STRUCTURE ====== */
+.main-navbar-wrapper { width:100%; }
+.main-navbar-wrapper.main-navbar--below {
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+}
+
+/* ====== COLOR TOKENS ====== */
+:root {
+  /* ---------- Top Level ---------- */
+  --menu-top-bg:            #060;
+  --menu-top-bg-hover:      #ddd;
+  --menu-top-bg-active:     #e9efe9;
+  --menu-top-color:         #fff;
+  --menu-top-color-hover:   #333;
+  --menu-top-color-active:  #000;
+
+  /* ---------- Dropdown Level 1 ---------- */
+  --menu-dd1-bg:            #eee;
+  --menu-dd1-bg-hover:      #060;
+  --menu-dd1-bg-active:     #e9ecef;
+  --menu-dd1-color:         #212529;
+  --menu-dd1-color-hover:   #fff;
+  --menu-dd1-color-active:  #0d6efd;
+  --menu-dd1-border:        rgba(0,0,0,.08);
+
+  /* ---------- Dropdown Level 2 ---------- */
+  --menu-dd2-bg:            #ffffff;
+  --menu-dd2-bg-hover:      #f1f1f1;
+  --menu-dd2-bg-active:     #e2e6ea;
+  --menu-dd2-color:         #212529;
+  --menu-dd2-color-hover:   #0d6efd;
+  --menu-dd2-color-active:  #0d6efd;
+  --menu-dd2-border:        rgba(0,0,0,.05);
+}
+
+/* ====== BASE BAR BACKGROUND ====== */
+.main-navbar-wrapper { background: var(--menu-top-bg); }
+
+/* ====== TOP LEVEL LINKS ====== */
+.main-navbar .nav-link {
+  color: var(--menu-top-color);
+  padding: .75rem 1rem;
+  border-radius: .0rem;
+  transition: background .2s, color .2s;
+}
+
+.main-navbar .nav-link:hover,
+.main-navbar .nav-link:focus {
+  color: var(--menu-top-color-hover);
+  background: var(--menu-top-bg-hover);
+}
+
+.main-navbar .nav-link.active,
+.main-navbar .nav-item.show > .nav-link {
+  color: var(--menu-top-color-active);
+  background: var(--menu-top-bg-active);
+}
+
+/* ====== DROPDOWN LEVEL 1 ====== */
+.main-navbar .dropdown-menu {
+  background: var(--menu-dd1-bg);
+  border: 1px solid var(--menu-dd1-border);
+  border-radius: .5rem;
+  box-shadow: 0 .25rem .5rem rgba(0,0,0,.05);
+  min-width: 14rem;
+}
+
+.main-navbar .dropdown-item {
+  color: var(--menu-dd1-color);
+  transition: background .2s, color .2s;
+}
+
+.main-navbar .dropdown-item:hover,
+.main-navbar .dropdown-item:focus {
+  color: var(--menu-dd1-color-hover);
+  background: var(--menu-dd1-bg-hover);
+}
+
+.main-navbar .dropdown-item.active,
+.main-navbar .dropdown-item:active {
+  color: var(--menu-dd1-color-active);
+  background: var(--menu-dd1-bg-active);
+}
+
+/* ====== DROPDOWN LEVEL 2 (SUBMENU) ====== */
+.dropdown-submenu { position: relative; }
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: .2rem;
+  margin-top: -0.25rem;
+  background: var(--menu-dd2-bg);
+  border: 1px solid var(--menu-dd2-border);
+  border-radius: .5rem;
+  box-shadow: 0 .25rem .5rem rgba(0,0,0,.05);
+}
+
+.dropdown-submenu > .dropdown-toggle::after {
+  content: "\\25B6";
+  float: right;
+  font-size: .65rem;
+  opacity: .5;
+  margin-top: .3rem;
+  margin-left: .25rem;
+}
+
+.dropdown-submenu .dropdown-item {
+  color: var(--menu-dd2-color);
+}
+
+.dropdown-submenu .dropdown-item:hover,
+.dropdown-submenu .dropdown-item:focus {
+  color: var(--menu-dd2-color-hover);
+  background: var(--menu-dd2-bg-hover);
+}
+
+.dropdown-submenu .dropdown-item.active,
+.dropdown-submenu .dropdown-item:active {
+  color: var(--menu-dd2-color-active);
+  background: var(--menu-dd2-bg-active);
+}
+
+/* ====== HOVER OPEN ====== */
+@media (min-width:992px){
+  .dropdown:hover>.dropdown-menu { display:block; }
+  .dropdown-submenu:hover>.dropdown-menu { display:block; }
+}
+
+/* Ensure burger icon shows on dark background */
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.4);
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Let dropdowns display inside collapse on mobile */
+@media (max-width: 991.98px) {
+  .navbar .dropdown-menu {
+    position: static;
+    float: none;
+    box-shadow: none;
+    border: 0;
+    background: var(--menu-dd1-bg);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .dropdown-submenu .dropdown-menu {
+    margin-left: 1rem;
+    margin-top: .25rem;
+    display: none;
+  }
+  .dropdown-submenu .dropdown-menu.show {
+    display: block;
+  }
+}
+
+
+/* Mobile-friendly nested dropdowns */
+@media (max-width: 991.98px) {
+  .dropdown-menu.show { display:block; }
+  .dropdown-submenu .dropdown-menu {
+    position: static;
+    float: none;
+    margin-left: 1rem;
+    margin-top: .25rem;
+    display: none;
+  }
+  .dropdown-submenu .dropdown-menu.show {
+    display:block;
+  }
+}

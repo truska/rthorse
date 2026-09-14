@@ -1,0 +1,15 @@
+
+.parent-element {
+    position: relative; /* required so .edit-btn-wrapper positions relative to this */
+}
+.edit-btn-wrapper {
+    position:absolute;
+    left: 0px;
+    top: 20px;
+    color: #fff;
+    z-index: 1500;
+    pointer-events: auto;     /* keep the button clickable */
+}
+a {
+    text-decoration: none;
+}

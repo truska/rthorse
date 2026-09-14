@@ -1,0 +1,72 @@
+## Default CMS .htaccess (Reusable) [2025-08-19]
+RewriteEngine On
+RewriteBase /
+
+# --- Custom error pages ---
+ErrorDocument 404 https://roundthornsporthorses.com/error/404.html
+ErrorDocument 403 https://roundthornsporthorses.com/error/403.html
+# --- if set to a slug - Requires pages set as sluf 403 and 404 with sutitable content
+
+# --- Protect CSP log (if used) ---
+<Files "csp-violations.log">
+    Require all denied
+</Files>
+
+# --- Preserve HTTP Authorization headers (for APIs, CMS auth etc.) ---
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# --- Leave ACME/.well-known and robots.txt untouched ---
+RewriteCond %{REQUEST_URI} ^/?\.well-known [NC,OR]
+RewriteCond %{REQUEST_URI} ^/?robots\.txt$ [NC]
+RewriteRule ^ - [L]
+
+# --- Canonical host: force bare domain (strip www) ---
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [R=301,L]
+
+# --- Optional HTTPS enforcement (via marker file .force-https) ---
+RewriteCond %{DOCUMENT_ROOT}/.force-https -f
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# --- WebP Auto-Serving (fallback if .jpg/.png has matching .webp) ---
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME} (.*)\.(jpg|jpeg|png)$
+    RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+    RewriteRule (.*)\.(jpg|jpeg|png)$ $1.webp [T=image/webp,E=webp,L]
+</IfModule>
+<IfModule mod_headers.c>
+    Header append Vary Accept
+</IfModule>
+
+# --- Security headers ---
+<IfModule mod_headers.c>
+    # Placeholder CSP (to be managed dynamically by CMS)   
+    ## --- CSP-POLICY-START ---
+
+    ## --- CSP-POLICY-END ---
+
+    # HSTS (forces HTTPS for 1 year)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy (feature restrictions)
+    Header set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+</IfModule>
+
+# --- CMS routing ---
+RewriteRule ^/?$ /welcome [L,NC,QSA]
+RewriteRule ^index(.*)$ /welcome [L,R=301]
+
+# Send all other requests to inside.php (but not favicon, icons, or inside.php itself)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(favicon\.ico|apple-touch-icon.*\.png|inside\.php)$ [NC]
+RewriteRule ^(.*)$ inside.php?url=$1 [QSA,L]

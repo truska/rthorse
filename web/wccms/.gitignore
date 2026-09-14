@@ -1,0 +1,24 @@
+# Development trash
+_notes
+_*
+._*
+
+# Image folder and images
+img
+images
+*.jpg
+*.png
+
+# Import files
+importfiles/*
+
+# log files
+*.log
+
+xx_*/
+
+# BACKUPS FILES
+bku_*.*
+
+# Keep script out of sync
+scripts/*.sh

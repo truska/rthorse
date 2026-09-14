@@ -1,0 +1,26 @@
+# Local database credentials
+/private/db.php
+/private/dbcon.php
+/private/dbm.php
+/private/database.local.php
+
+# Server-managed or sensitive directories
+/.composer/
+/.ssh/
+/backup/
+/cgi-bin/
+/log/
+/ssl/
+/tmp/
+/webdav/
+
+# Runtime and user-generated web content
+/web/error/
+/web/filestore/
+/web/stats/
+
+# Editor and operating-system noise
+*.code-workspace
+.vscode/
+*.log
+.DS_Store
