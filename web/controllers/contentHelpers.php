@@ -48,7 +48,7 @@ function getValidImagePath($image, $folder = 'content', $size = 'md') {
 
 
 // --- Render gallery for a content block ---
-function renderGallery($conn, $formid, $recordid, $baseURL, $sort = "id ASC", $folder = "content", $productName = "") {
+function renderGallery($conn, $formid, $recordid, $baseURL, $sort = "id ASC", $folder = "content", $productName = "", bool $showFallback = true) {
     // --- Get gallery records ---
     $selectgallery = "
         SELECT * FROM `gallery`
@@ -63,6 +63,10 @@ function renderGallery($conn, $formid, $recordid, $baseURL, $sort = "id ASC", $f
 
     // --- No images found: show fallback ---
     if ($numgallery < 1) {
+        if (!$showFallback) {
+            return;
+        }
+
         $fallbackMd = "/filestore/images/{$folder}/md/no-image.jpg";
         $fallbackLg = "/filestore/images/{$folder}/lg/no-image.jpg";
         echo "<div class='text-center'>
@@ -99,34 +103,36 @@ function renderGallery($conn, $formid, $recordid, $baseURL, $sort = "id ASC", $f
              <img src='{$baseURL}{$mainImgMd}' class='img-fluid' alt='{$mainAlt}'>
           </a>";
 
-    // --- Output thumbnails ---
-    echo "<div class='row gx-3 gy-3 pt-3'>";
-    while ($rowgallery = mysqli_fetch_assoc($querygallery)) {
-        $image = !empty($rowgallery['image']) ? $rowgallery['image'] : '';
-        
-        // ✅ Get verified paths for both large and medium
-        $imgLg = getValidImagePath($image, $folder, 'lg');
-        $imgMd = getValidImagePath($image, $folder, 'md');
+    // A single image needs no thumbnail of itself. Keep the gallery layout
+    // clean, while retaining thumbnails when visitors can switch images.
+    if ($numgallery > 1) {
+        echo "<div class='row gx-3 gy-3 pt-3'>";
+        while ($rowgallery = mysqli_fetch_assoc($querygallery)) {
+            $image = !empty($rowgallery['image']) ? $rowgallery['image'] : '';
 
-        $thumbAlt = !empty(trim($rowgallery['alttag'] ?? ''))
-        ? htmlspecialchars(trim($rowgallery['alttag']), ENT_QUOTES)
-        : $defaultText;
-    
-    $thumbCaption = !empty(trim($rowgallery['caption'] ?? ''))
-        ? htmlspecialchars(trim($rowgallery['caption']), ENT_QUOTES)
-        : $defaultText;
+            // Use verified paths for both large and medium images.
+            $imgLg = getValidImagePath($image, $folder, 'lg');
+            $imgMd = getValidImagePath($image, $folder, 'md');
 
+            $thumbAlt = !empty(trim($rowgallery['alttag'] ?? ''))
+                ? htmlspecialchars(trim($rowgallery['alttag']), ENT_QUOTES)
+                : $defaultText;
 
-        echo "<div class='col-6 col-md-3 col-lg-3'>";
-        echo "<a data-zoom-id='zoom-$recordid'
+            $thumbCaption = !empty(trim($rowgallery['caption'] ?? ''))
+                ? htmlspecialchars(trim($rowgallery['caption']), ENT_QUOTES)
+                : $defaultText;
+
+            echo "<div class='col-6 col-md-3 col-lg-3'>";
+            echo "<a data-zoom-id='zoom-$recordid'
                  href='{$baseURL}{$imgLg}'
                  data-image='{$baseURL}{$imgMd}'
                  title='{$thumbCaption}'>";
-        echo "<img src='{$baseURL}{$imgMd}' class='img-fluid w-100' alt='{$thumbAlt}'>";
-        echo "</a>";
+            echo "<img src='{$baseURL}{$imgMd}' class='img-fluid w-100' alt='{$thumbAlt}'>";
+            echo "</a>";
+            echo "</div>";
+        }
         echo "</div>";
     }
-    echo "</div>";
 }
 
 
@@ -180,7 +186,9 @@ function renderContentColumn($rowcontent, $colIndex, $baseURL, $conn, $formid, $
     if ($subheading) echo "<h3>{$subheading}</h3>";
     if ($image) echo "<img src='{$baseURL}/filestore/images/content/lg/{$image}' class='img-fluid mb-3' alt=''>";
     if ($text) echo $text;
-    if ($includeGallery) renderGallery($conn, $formid, $rowcontent["id"], $baseURL, $sort);
+    // Content blocks can have a normal image as well as an optional gallery.
+    // Do not add a placeholder beneath the normal image when no gallery exists.
+    if ($includeGallery) renderGallery($conn, $formid, $rowcontent["id"], $baseURL, $sort, 'content', '', false);
     echo "</div>";
 }
 
