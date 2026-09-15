@@ -431,6 +431,7 @@ window.flatpickr = function(...args) {
 	<script type="text/javascript">
 		tinymce.init({
 			selector: 'textarea',
+			license_key: 'gpl',
 			menubar: true,
 			entity_encoding: 'raw',
   forced_root_block: 'p', // ensures <p> tags not <br>

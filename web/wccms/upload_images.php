@@ -565,6 +565,7 @@ function imgResize($path, $w, $h)
    <script type="text/javascript">
       tinymce.init({
          selector: 'textarea',
+         license_key: 'gpl',
          menubar: true,
       });
 

@@ -3,13 +3,13 @@
 <?php
 
 //Defaults
-$tinymcemenubar = 'file edit view format';
+$tinymcemenubar = 'edit view insert format tools table help';
 
 $tinymceheight = '300';
 
-$tinymcetoolbar = 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment | code';
+$tinymcetoolbar = 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | link image media | removeformat | code';
 
-$tinymceplugins = 'code';
+$tinymceplugins = 'advlist autolink code image link lists media table';
 
 //Get valuses from preferences
 
@@ -43,6 +43,7 @@ while ($respref1 = mysqli_fetch_assoc($querypref2)) {
 <script type="text/javascript">
     tinymce.init({
         selector: 'textarea#tinymcetextarea',
+        license_key: 'gpl',
         menubar: '<?php echo $tinymcemenubar; ?>',
         height: '<?php echo $tinymceheight ; ?>',
         toolbar: '<?php echo $tinymcetoolbar ; ?>',

@@ -44,12 +44,8 @@
 <!-- Flatpickr Date picker for managed formating -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-<!-- ✅ TinyMCE -->
-<?php if ($prefs["prefTinyMCE"]) { ?>
-  <script src="https://cdn.tiny.cloud/1/<?php echo $prefs["prefTinyMCE"]; ?>/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-<?php } else { ?>
-  <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
-<?php } ?>
+<!-- TinyMCE Community, self-hosted under GPLv2+. -->
+<script src="<?php echo $baseURL; ?>/wccms/js/tinymce/tinymce.min.js"></script>
 
 <!-- ✅ Optional dynamic CSS injection -->
 <!--
