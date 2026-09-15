@@ -12,6 +12,9 @@
 
 <!-- ✅ jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- jQuery UI must be available before CMS page scripts initialise sortable. -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
 
 <!-- ✅ Bootstrap CSS CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,8 +47,33 @@
 <!-- Flatpickr Date picker for managed formating -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-<!-- TinyMCE Community, self-hosted under GPLv2+. -->
-<script src="<?php echo $baseURL; ?>/wccms/js/tinymce/tinymce.min.js"></script>
+<!-- Self-hosted TinyMCE Community. This header is loaded by every CMS form. -->
+<script src="<?php echo htmlspecialchars(rtrim($baseURL, '/') . '/wccms/js/tinymce/tinymce.min.js', ENT_QUOTES, 'UTF-8'); ?>"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof window.tinymce === 'undefined') {
+            console.error('TinyMCE did not load from the local CMS asset.');
+            return;
+        }
+
+        // The ID selector keeps cached legacy form output working while the
+        // class selector supports the corrected multi-editor form markup.
+        document.querySelectorAll('textarea.tinymcetextarea, textarea#tinymcetextarea').forEach(function (textarea) {
+            window.tinymce.init({
+                target: textarea,
+                license_key: 'gpl',
+                height: 400,
+                menubar: 'edit view insert format tools table help',
+                plugins: 'advlist autolink code image link lists media table',
+                toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | link image media | removeformat | code',
+                entity_encoding: 'raw',
+                forced_root_block: 'p',
+                convert_urls: false,
+                promotion: false
+            });
+        });
+    });
+</script>
 
 <!-- ✅ Optional dynamic CSS injection -->
 <!--

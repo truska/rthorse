@@ -426,20 +426,7 @@ window.flatpickr = function(...args) {
 	// include('autoload.php'); // Removed by salva TDR | 17.1.2023
 	?>
 
-	<!-- Start of original script -->
-
 	<script type="text/javascript">
-		tinymce.init({
-			selector: 'textarea',
-			license_key: 'gpl',
-			menubar: true,
-			entity_encoding: 'raw',
-  forced_root_block: 'p', // ensures <p> tags not <br>
-  convert_newlines_to_brs: false,
-  remove_linebreaks: false
-
-		});
-
 		$(document).ready(function() {
 			$.post('ajaxrequest/ajax.folder.php', {
 				folder: 'content'

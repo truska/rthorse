@@ -639,7 +639,7 @@ class FormField
          }
       }
       $output .= "</label>";
-      $output .= "<textarea name='{$this->rowformfield["name"]}' id='tinymcetextarea' class='form-control {$this->rowformfield["class"]}' rows='10' >{$this->ContentValue}</textarea>";
+      $output .= "<textarea name='{$this->rowformfield["name"]}' class='form-control tinymcetextarea {$this->rowformfield["class"]}' rows='10' >{$this->ContentValue}</textarea>";
       $output .= "<span class='comment'>{$this->rowformfield["comment"]}</span>";
       $output .= "</div>";
 

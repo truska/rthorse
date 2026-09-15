@@ -581,92 +581,8 @@
 			}
 			?>
 
-			getattr();
-			getcomp();
-		
-
-			$('#attrselect').change(function () {
-				var selectid = $('#attrselect').val();
-				var selecttext = $('#attrselect option:selected').text();
-				var proid = "<?php echo $id; ?>";
-				//alert(selectid);
-				var header = "<tr style='font-weight:bold'><td>Attribute Name</td><td>Value</td><td>Weight</td><td>ShowOnWeb</td><td>Action</td></tr>"
-
-				$.ajax({
-					url: 'ajax.getattr.php',
-					type: 'post',
-					data: 'attrid=' + selectid + '&proid=' + proid + '&attrtext=' + selecttext,
-					success: function (msg) {
-						//  alert(msg)
-						$('#attrvalue').empty();
-						$('#attrvalue').append(header);
-						$('#attrvalue').append(msg);
-					}
-				})
-			})
-
-			//comp code
-			$('#compselect').change(function () {
-				var selectid = $('#compselect').val();
-				var selecttext = $('#compselect option:selected').text();
-				var proid = "<?php echo $id; ?>";
-				//alert(selectid);
-				var header = "<tr style='font-weight:bold'><td>Component Name</td><td>Value</td><td>Weight</td><td>Extra Cost</td><td>ShowOnWeb</td><td>Action</td></tr>"
-				$.ajax({
-					url: 'ajax.getcomp.php',
-					type: 'post',
-					data: 'attrid=' + selectid + '&proid=' + proid + '&attrtext=' + selecttext,
-					success: function (msg) {
-						// alert(msg)
-						$('#compvalue').empty();
-						$('#compvalue').append(header);
-						$('#compvalue').append(msg);
-					}
-				})
-			})
 		})
 
-		//comp function
-		function getcomp() {
-			var selectid = $('#compselect').val();
-			var selecttext = $('#compselect option:selected').text();
-			var proid = "<?php echo $id; ?>";
-			//alert(selectid);
-			var header = "<tr style='font-weight:bold'><td>Component Name</td><td>Value</td><td>Weight</td><td>Extra Cost</td><td>ShowOnWeb</td><td>Action</td></tr>"
-
-			$.ajax({
-				url: 'ajax.getcomp.php',
-				type: 'post',
-				data: 'attrid=' + selectid + '&proid=' + proid + '&attrtext=' + selecttext,
-				success: function (msg) {
-					// alert(msg)
-					$('#compvalue').empty();
-					$('#compvalue').append(header);
-					$('#compvalue').append(msg);
-				}
-			})
-		}
-
-		//attr function
-		function getattr() {
-			var selectid = $('#attrselect').val();
-			var selecttext = $('#attrselect option:selected').text();
-			var proid = "<?php echo $id; ?>";
-			//alert(selectid);
-			var header = "<tr style='font-weight:bold'><td>Attribute Name</td><td>Value</td><td>Weight</td><td>ShowOnWeb</td><td>Action</td></tr>"
-
-			$.ajax({
-				url: 'ajax.getattr.php',
-				type: 'post',
-				data: 'attrid=' + selectid + '&proid=' + proid + '&attrtext=' + selecttext,
-				success: function (msg) {
-					//alert(msg)
-					$('#attrvalue').empty();
-					$('#attrvalue').append(header);
-					$('#attrvalue').append(msg);
-				}
-			})
-		}
 	</script>
 
 	<?php
@@ -1216,7 +1132,6 @@
 	// include("include/footer.php"); // - footer.php doesn't exist inside wccms/include folder - Salva TDR | 17.1.2023
 	// echo "</div>"; // Removed by salva TDR | 17.1.2023
 	include ("include/footer-code.php");
-	include ("include-tinymce.php");
 	?>
 </body>
 

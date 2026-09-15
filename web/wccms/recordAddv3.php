@@ -335,15 +335,7 @@ if (isset($_POST['submit'])) {
 	// include('autoload.php'); // Removed by salva TDR | 17.1.2023
 	?>
 
-	<!-- Start of original script -->
-
-	<script type="text/javascript">
-		tinymce.init({
-			selector: 'textarea',
-			license_key: 'gpl',
-			menubar: true,
-		});
-
+   <script type="text/javascript">
 		$(document).ready(function() {
 			$.post('ajaxrequest/ajax.folder.php', {
 				folder: 'content'

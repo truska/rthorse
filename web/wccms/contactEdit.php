@@ -784,7 +784,7 @@ if(isset($_POST['submit']))
 							}
 						}
 				echo "</label>" ;
-						echo "<textarea name='" . $rowformfield["name"] . "' id='tinymcetextarea' class='form-control " . $rowformfield["class"] . "' rows='10' >" . $ContentValue . "</textarea>" ;
+						echo "<textarea name='" . $rowformfield["name"] . "' class='form-control tinymcetextarea " . $rowformfield["class"] . "' rows='10' >" . $ContentValue . "</textarea>" ;
 				echo "</div>" ;
 			}
 

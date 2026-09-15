@@ -4,10 +4,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- ✅ jQuery UI (required for .sortable()) -->
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
-
 <!-- ✅ Slidebar / Accordion / Utility Scripts -->
 <!-- <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script> --> <!-- No longer used -->
 <script src="js/jquery.scrollTo.min.js"></script>
