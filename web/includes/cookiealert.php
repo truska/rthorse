@@ -1,16 +1,9 @@
-<!-- START cookiealert -->
-<div class="alert alert-dismissible text-center cookiealert" role="alert">
-
+<!-- Cookie notice: shown until acknowledged, then remembered for 365 days. -->
+<aside class="cookiealert" role="region" aria-label="Cookie notice" hidden>
   <div class="cookiealert-container">
-		  
-		  <p>We use cookies to ensure that we give you the best experience on this website. By continuing to access the website you are agreeing to the use. For more information see our <a href="<?php echo $basedURL;?>/privacy-policy" class="privacyNode">Privacy Policy</a> and <a href="<?php echo $basedURL;?>/terms-of-use" class="privacyNode">Terms of Use</a>.</p>
-		  
-      <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close" style="border-color:#333;background-color:var(--brandred);">
-          OK
-      </button>
-	  </p>
-
+    <p>We use essential cookies to keep this website working. Read our
+      <a href="<?php echo htmlspecialchars($baseURL, ENT_QUOTES, 'UTF-8'); ?>/privacy-policy">Privacy Policy</a>
+      and <a href="<?php echo htmlspecialchars($baseURL, ENT_QUOTES, 'UTF-8'); ?>/terms-of-use">Terms of Use</a>.</p>
+    <button type="button" class="acceptcookies">OK</button>
   </div>
-
-</div>
-<!-- END cookiealert-->
+</aside>

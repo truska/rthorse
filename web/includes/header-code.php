@@ -14,7 +14,6 @@ if($minified == 'Yes') {
 	?>
 	<!-- Minified -->
 		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/custom.min.css">
-		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/media.min.css">
 		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/menu.min.css">
 	<?php
 }
@@ -23,7 +22,6 @@ else
 	?>
 	<!-- Original -->
 		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/custom.css">
-		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/media.css">
 		<link rel="stylesheet" href="<?php echo $baseURL ; ?>/css/menu.css">
 	<?php
 }
