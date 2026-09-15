@@ -28,7 +28,7 @@
 					<h3>Access Info</h3>
 				<?php
 					echo "<p>";
-						echo "Page id: " . $slugID . " ($ slugID)<br>" ;
+						echo "Page id: " . $pageID . " (\$pageID)<br>" ;
 						echo "segs [0]: " . $segs[0] . "<br>" ;	
 						echo "segs [1]: " . $segs[1] . "<br>" ;	
 						echo "segs [2]: " . $segs[2] . "<br>" ;	
