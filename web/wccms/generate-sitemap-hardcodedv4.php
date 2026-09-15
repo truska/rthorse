@@ -102,7 +102,7 @@ $toast = [];
 define('SITEMAP_FILE', $_SERVER['DOCUMENT_ROOT'] . '/sitemap-dev.xml');
 
 function generateSitemap() {
-    global $conn;
+    global $conn, $baseURL;
     
     // XML header
     $xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\n";
@@ -116,7 +116,7 @@ function generateSitemap() {
     $pageCount = 0;
     
     while ($row = mysqli_fetch_assoc($result)) {
-        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . htmlspecialchars($row['slug']);
+        $url = $baseURL . '/' . htmlspecialchars($row['slug']);
         $priority = !empty($row['googlesitemappriority']) ? $row['googlesitemappriority'] : '0.5';
         
         $xmlContent .= "  <url>\n";
@@ -185,7 +185,7 @@ if (isset($_POST['generate_sitemap'])) {
                 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . htmlspecialchars($row['slug']);
+                        $url = $baseURL . '/' . htmlspecialchars($row['slug']);
                         $priority = !empty($row['googlesitemappriority']) ? $row['googlesitemappriority'] : '0.5';
                         echo "<tr><td>{$url}</td><td>{$lastmod}</td><td>{$priority}</td></tr>";
                     }

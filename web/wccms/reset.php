@@ -5,16 +5,7 @@ include('setting/main-top-files.php');
 $toast = [];
 $email = '';
 
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-   $link = "https";
-else
-   $link = "http";
-// Here append the common URL characters. 
-$link .= "://";
-// Append the host(domain name, ip) to the URL. 
-$link .= $_SERVER['HTTP_HOST'];
-// Append the requested resource location to the URL 
-$link .= $_SERVER['REQUEST_URI'];
+$link = rthCurrentUrl();
 
 $resetCode = $_GET['token'] ?? ($_SERVER['QUERY_STRING'] ?? '');
 $statement = Database::pdo()->prepare(

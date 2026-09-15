@@ -17,7 +17,8 @@
 	
 	$pageURL = $_SERVER['REQUEST_URI'];
 	$pageURL = rtrim($pageURL,'/') ;
-	$actual_link = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	require_once __DIR__ . '/../private/site-url.php';
+	$actual_link = rthCurrentUrl();
 	$pagenumber = basename( $pageURL );
 
 	

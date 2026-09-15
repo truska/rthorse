@@ -569,9 +569,9 @@ class FormField
                   </div>";
                } else {
                   if ($this->ContentValue) {
-                     $output .= "<img src='https://" . $_SERVER['SERVER_NAME'] . "/filestore/{$this->rowformfield["mediatype"]}/{$this->rowformfield["file_folder_name"]}/{$this->ContentValue}' class='pull-right ghai2' style='max-width: 120px;'>";
+                     $output .= "<img src='{$baseURL}/filestore/{$this->rowformfield["mediatype"]}/{$this->rowformfield["file_folder_name"]}/{$this->ContentValue}' class='pull-right ghai2' style='max-width: 120px;'>";
                   } else {
-                     $output .= "<img src='https://" . $_SERVER['SERVER_NAME'] . "/wccms/img/no-image.jpg' class='pull-right ghai2' style='padding-top:30px;max-width: 80px;'>";
+                     $output .= "<img src='{$baseURL}/wccms/img/no-image.jpg' class='pull-right ghai2' style='padding-top:30px;max-width: 80px;'>";
                   }
                }
 

@@ -68,17 +68,10 @@ $prefs=loadPrefs($conn);
 		echo "Main Function Company Name: ".getCompanyName($prefs)."<br>" ;
 	}
 
-// Check for SSL (as set in Prefs) and set the base URL for internal links.
-// HTTP_HOST intentionally retains a non-standard development port (for example
-// :28085); SERVER_NAME alone would discard it and break image/asset URLs.
-	$requestHost = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
-	if ($prefs['prefSSL'] == 'Yes' ) {
-		$baseURL = "https://" . $requestHost;
-	}
-	else
-	{
-		$baseURL = "http://" . $requestHost;
-	}
+// Build URLs from the request, not the shared prefSSL database setting. This
+// preserves development ports and automatically follows staging/live HTTPS.
+require_once __DIR__ . '/../../private/site-url.php';
+$baseURL = rthBaseUrl();
 
 	if ($debug == 'Yes' ){
 		echo "<p><strong>Check URL</strong><br>SSL = " . $prefs['prefSSL'] . "<br>baseURL = " . $baseURL . "</p>" ;

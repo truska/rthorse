@@ -14,7 +14,7 @@
    define('SITEMAP_FILE', $_SERVER['DOCUMENT_ROOT'] . $sitemapURLPath);
 
    function generateSitemap($writeToFile = false) {
-      global $conn, $ping, $sitemapURLPath;
+      global $conn, $ping, $sitemapURLPath, $baseURL;
       error_log("Into generate 'generateSitemap' function");
       global $conn;
 
@@ -54,7 +54,7 @@
                }
 
                $idPart = ($showId) ? $row['id'] . '/' : '';
-               $url = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $path . $idPart . htmlspecialchars($slug);
+               $url = $baseURL . '/' . $path . $idPart . htmlspecialchars($slug);
 
                $xmlContent .= "  <url>\n";
                $xmlContent .= "    <loc>{$url}</loc>\n";
@@ -87,7 +87,7 @@
                savelog('', $action, $sqlproductlog, $logtable, 'SUCCESS', $notes, '');
 
                if ($ping === 'Yes') {
-                  $sitemapURL = 'https://' . $_SERVER['HTTP_HOST'] . $sitemapURLPath;
+                  $sitemapURL = $baseURL . $sitemapURLPath;
 
                   // Ping Google
                   $googlePing = 'https://www.google.com/ping?sitemap=' . urlencode($sitemapURL);

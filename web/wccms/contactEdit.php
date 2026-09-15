@@ -881,11 +881,11 @@ if(isset($_POST['submit']))
                             $galleryArr = mysqli_fetch_assoc($galleryQuery) ;
 
                             //    if ($rowcontent[$myvar1]) 
-                            echo "<img src='http://" . $_SERVER['SERVER_NAME'] . "/filestore/" . $rowformfield["mediatype"] . "/" . $galleryArr["folder_name"] . "/" . $galleryArr['image1'] . "' class='pull-right' style='max-width: 120px;'>" ;
+                            echo "<img src='" . $baseURL . "/filestore/" . $rowformfield["mediatype"] . "/" . $galleryArr["folder_name"] . "/" . $galleryArr['image1'] . "' class='pull-right' style='max-width: 120px;'>" ;
                         }
                         else 
                         {
-                            echo "<img src='http://" . $_SERVER['SERVER_NAME'] . "/filestore/" . $rowformfield["mediatype"] . "/" . $rowformfield["file_folder_name"] . "/" . $ContentValue . "' class='pull-right' style='max-width: 120px;'>" ;
+                            echo "<img src='" . $baseURL . "/filestore/" . $rowformfield["mediatype"] . "/" . $rowformfield["file_folder_name"] . "/" . $ContentValue . "' class='pull-right' style='max-width: 120px;'>" ;
                         } 
 
                         echo "<label for='exampleInputEmail1'>" . $rowformfield["label"] . "" ;

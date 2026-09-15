@@ -37,14 +37,9 @@ else
 $prefs = loadPrefs($conn);
 // $prefshop = loadShopPrefs();
 
-// Check for SSL (as set in Prefs) and set the base URL for internal links.
-// HTTP_HOST preserves a non-standard development port such as :28085.
-$requestHost = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
-if ($prefs['prefSSL'] == 'Yes') {
-   $baseURL = "https://" . $requestHost;
-} else {
-   $baseURL = "http://" . $requestHost;
-}
+// Build URLs from the request, not the shared prefSSL database setting.
+require_once dirname(__FILE__) . '/../../../private/site-url.php';
+$baseURL = rthBaseUrl();
 $BASE_URL = $baseURL;
 
 // Check if user is logged in. Use the executed script name rather than the
