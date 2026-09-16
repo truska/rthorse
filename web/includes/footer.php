@@ -177,8 +177,11 @@
             <div class="col-12 col-md-6 right">
                 <a href="https://truska.com" target="_blank">
                     designed &amp; coded by truska
-                </a><br>
-                <span>IP: <?php echo $_SERVER['REMOTE_ADDR']; ?> | Prefs: <?php echo $prefs['prefTruskaIP']; ?></span>
+                </a>
+                <!-- 
+                    <br>
+                    <span>IP: <?php echo $_SERVER['REMOTE_ADDR']; ?> | Prefs: <?php echo $prefs['prefTruskaIP']; ?></span>
+                -->
             </div>
         </div>
     </div>
