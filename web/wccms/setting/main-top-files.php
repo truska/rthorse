@@ -35,6 +35,7 @@ else
 }
 
 $prefs = loadPrefs($conn);
+require_once dirname(__FILE__) . '/../../includes/admin-access.php';
 // $prefshop = loadShopPrefs();
 
 // Build URLs from the request, not the shared prefSSL database setting.
@@ -55,6 +56,15 @@ if (!isset($_SESSION["useremail"])) {
 } else {
    $USER = new CMSUser($_SESSION['useremail']);
    $user = $USER->getUser();
+
+   // IP restrictions are opt-in.  When enabled, a valid CMS session must
+   // also originate from one of the configured preference IP addresses.
+   if (!cmsAdminRequestAllowed($prefs)) {
+      $_SESSION = [];
+      session_destroy();
+      header("Location: " . $BASE_URL . "/wccms/index.php");
+      exit();
+   }
 }
 
 if (!isset($userid) && isset($_SESSION['userid'])) {

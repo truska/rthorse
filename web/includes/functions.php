@@ -1,6 +1,8 @@
 <!-- START functions rxs -->
 <?php
 
+require_once __DIR__ . '/admin-access.php';
+
 function loadPrefs($conn)
 {
 	$selectprefs = "SELECT `name`, `value` FROM `preferences` ORDER BY `prefCat` ";
@@ -291,14 +293,7 @@ function securityCheck($param, $type = null)
 function showEditButton($frm, $id) {
     global $prefs, $baseURL;
 
-    $allowedIPs = [
-        $prefs['prefTruskaIP'],
-        $prefs['prefCoderIP'],
-        $prefs['prefClientIP'],
-        $prefs['prefClient1IP']
-    ];
-
-    if (in_array($_SERVER['REMOTE_ADDR'], $allowedIPs)) {
+    if (($prefs['prefPageAdminEdit'] ?? 'Yes') === 'Yes' && cmsAdminRequestAllowed($prefs)) {
         echo "<div class='edit-btn-wrapper'>";
         	echo "<p><a href='{$baseURL}/wccms/recordEditv{$prefs['prefCMSVer']}.php?frm={$frm}&id={$id}' class='btn btn-success btn-sm' target='_blank' rel='noopener'>";
         	echo "<span><i class='fa-solid fa-pen-to-square'></i></span></a></p>";

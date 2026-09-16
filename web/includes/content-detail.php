@@ -12,12 +12,7 @@
   }
 
 
-  $allowedIPs = [
-    $prefs['prefTruskaIP'],
-    $prefs['prefCoderIP'],
-    $prefs['prefClientIP'],
-    $prefs['prefClient1IP']
-];
+  $showAdminDetails = cmsAdminRequestAllowed($prefs);
 
 ?>
 
@@ -283,14 +278,14 @@
                         if($sireId) {
                         echo "<strong>Sire:</strong> <a href='".$baseURL."/horse/".$sireId."/".$sireSlug."'>" . $sireDisplay."</a>" ;
                           //echo " [idd: ".$sireId."]";
-                          if (in_array($_SERVER['REMOTE_ADDR'], $allowedIPs)) {
+                          if ($showAdminDetails) {
                             echo "<em> [id: ".$sireId."]</em>";
                           }
                         }
                         else{
                           echo "<strong>Sire:</strong> " . $sireDisplay."" ;
                              //echo "[idx: ".$sireId."]" ;
-                             if (in_array($_SERVER['REMOTE_ADDR'], $allowedIPs)) {
+                             if ($showAdminDetails) {
                               echo "<em> [id: ".$sireId."]</em>";
                             }
                         }
@@ -319,7 +314,7 @@
 
                           
                     
-                            if (in_array($_SERVER['REMOTE_ADDR'], $allowedIPs)) {
+                            if ($showAdminDetails) {
                               echo "<em> [id: ".$damId."]</em>";
                             }
 

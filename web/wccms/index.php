@@ -53,7 +53,12 @@ if (isset($_POST["sbt"])) {
    $code = random_int(100000, 999999);
    $from = $prefs['prefManagerEmail'];
    $to = $username;
-   $isOk = $user->signIn($username, $password);
+   // The optional IP allowlist applies to the CMS sign-in itself.  With the
+   // preference set to No (or no valid IPs configured), normal credentials
+   // are sufficient.
+   $isOk = (!cmsAdminIpRestrictionEnabled($prefs)
+      || in_array($_SERVER['REMOTE_ADDR'] ?? '', cmsAdminAllowedIps($prefs), true))
+      && $user->signIn($username, $password);
       
      // $username1 = $_SESSION["useremail"] ;
    

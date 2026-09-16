@@ -26,22 +26,9 @@
 			
 			include("includes/footer.php"); 	
 		
-			if ($_SERVER['REMOTE_ADDR'] == '154.59.132.166' 
-				or $_SERVER['REMOTE_ADDR'] == $prefs['prefCoderIP'] )
-				{	
-					include("includes/footer-debug.php");
-				}
-				else
-				{
-					echo "<h6>".$_SERVER['REMOTE_ADDR']." = ".$prefs['prefTruskaIP']."<h6>" ;
-				}
-		
-			if (
-				$_SERVER['REMOTE_ADDR'] == $prefs['prefClientIP']
-				or $_SERVER['REMOTE_ADDR'] == $prefs['prefClient1IP'] ) 
-				{	
-					include("includes/footer-debug-client.php");
-				}
+			if (cmsAdminRequestAllowed($prefs)) {
+				include("includes/footer-debug.php");
+			}
 
 			include("includes/footer-code.php"); 
 	
