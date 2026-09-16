@@ -175,8 +175,8 @@
                 </p>
             </div>
             <div class="col-12 col-md-6 right">
-                <a href="https://www.digita.agency" target="_blank">
-                    designed &amp; coded by digita.agency
+                <a href="https://truska.com" target="_blank">
+                    designed &amp; coded by truska
                 </a><br>
                 <span>IP: <?php echo $_SERVER['REMOTE_ADDR']; ?> | Prefs: <?php echo $prefs['prefTruskaIP']; ?></span>
             </div>
