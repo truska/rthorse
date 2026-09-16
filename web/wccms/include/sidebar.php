@@ -115,9 +115,9 @@ $userid = $user_role['id'];
 				echo "<a href='{$prefs['prefDropboxRequestURL']}' target='_blank'><i class='fab fa-dropbox'></i>&nbsp;&nbsp;DropBox File Request Link</a><br>";
 			}
 			echo "<hr>";
-			echo "<img src='{$baseURL}/wccms/img/wite-canvas-logo-sq-no-tag-150.jpg' style='max-width:60px' alt='wITeCanvas CMS'><br>";
+			echo "<img src='{$baseURL}/filestore/images/logos/wite-canvas-logo-sq-no-tag-150.jpg' style='max-width:60px' alt='wITeCanvas CMS'><br>";
 			echo "&copy; copyright<br>w&nbsp;<span style='color:#8AC340;'>IT</span>&nbsp;ecanvas.com 2020 - " . date("Y") . "<br>";
-			echo "Ver: 3.0.0";
+			echo "Ver: 4.0.0";
 		echo "</div>";
 		echo "<hr>";
 		?>
