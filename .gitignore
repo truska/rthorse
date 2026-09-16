@@ -24,3 +24,5 @@
 .vscode/
 *.log
 .DS_Store
+
+/private/
